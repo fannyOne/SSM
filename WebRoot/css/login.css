@@ -1,0 +1,39 @@
+/*登录界面样式*/
+.login_content{
+	padding-top:55px;
+	height:575px;
+}
+.login_guide{
+	width:338px;
+	height:50px;
+}
+.login_guide a{
+	display:block;
+	line-height:50px;	
+	font-family:"微软雅黑";
+}
+.find_pwd{
+	float:left;
+}
+.to_register{
+	float:right;
+}
+.login_way{
+	width:338px;
+}
+.login_way p{
+	width:338px;
+	height:50px;
+	line-height:50px;
+	border-bottom:1px #ccc solid;
+	color: #b76464;
+}
+.login_way_detail{
+	width:211px;
+	margin:0 auto;
+}
+.login_way_detail a{
+	display:block;
+	float:left;
+	margin:15px;
+}

@@ -1,0 +1,85 @@
+@charset "utf-8";
+/* CSS Document */
+/* 全局样式 */
+body{ padding:0;margin:0;}
+ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,p { padding:0; margin:0;}
+ul{list-style:none;}
+img{border:0px;}
+a{text-decoration:none;}
+.clearfloat{clear:both; height:0px; font-size:1px; line-height:0px;}
+/*实现图片等比缩放*/
+img {
+	width: auto\9;/*ie8*/
+	height: auto;
+	max-width: 100%;
+	vertical-align: middle;
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+}
+/*页面容器公用样式*/
+.container{
+	width: 100%;
+	min-width:1200px;
+	box-sizing: border-box;
+	font-size:12px;
+	font-family: "微软雅黑";
+	background: #f3f3f3;
+	margin:0 auto;
+	padding:0;
+}
+.content{
+	margin: 0 auto;
+	width:1200px;
+	padding:0;
+}
+/*常用样式*/
+.fl{float:left;}
+.fr{float:right;} 
+
+.ofh{overflow: hidden;}
+.ofs{overflow: scroll;}
+.ofs_y{overflow-y: scroll;}
+.ofs_x{overflow-x: scroll;}
+
+.pr{position:relative}
+.pa{position: absolute;}
+.pf{position: fixed;}
+
+.block{display:none;}
+.none{display:block;}
+
+.al{text-align: left;}
+.ar{text-align: right;}
+.ac{text-align: center;}
+
+.cfff{color:#fff!important;}
+.c000{color:#000!important;}
+.c333{color:#333!important;}
+.c666{color:#666!important;}
+.c999{color:#999!important;}
+.cccc{color:#ccc!important;}
+.c6e9{color:#6e99bd!important;}
+.ceb6877{color:#eb6877!important;}
+.c48a3a6{color:#48a3a6!important;}
+.c538dbe{color:#538dbe!important;}
+
+.lt_green{background-color:#48a3a6!important;}
+.green{background-color:#359295!important;}
+.lt_blue{background-color:#6e99bd!important;}
+.blue{background-color:#538dbe!important;}
+.bg_f3{background-color:#f3f3f3!important;}
+.bg_31{background-color:#313131!important;}
+
+.ft12{font-size:12px!important;}
+.ft14{font-size:14px!important;}
+.ft16{font-size:16px!important;}
+.ft18{font-size:18px!important;}
+.ft20{font-size:20px!important;}
+.ft22{font-size:22px!important;}
+.ft24{font-size:24px!important;}
+
+.auto{margin:0 auto;}
+.mg_R40{margin-right: 40px;}
+
+/*input输入框点击时改变边框颜色*/
+.outline_color{outline-color:#48a3a6;}

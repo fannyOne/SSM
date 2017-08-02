@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.mapper.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.model.Course" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="university_id" property="universityId" jdbcType="BIGINT" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="teacher" property="teacher" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="is_recommend" property="isRecommend" jdbcType="BIT" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
+    <result column="create_id" property="createId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_id" property="updateId" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="praise" property="praise" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, university_id, type_id, image_url, name, teacher, intro, is_recommend, is_delete, 
+    create_id, create_time, update_id, update_time, praise
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from course
+  </select>
+  
+  <select id="selectById" resultType="com.ssm.model.vo.CourseVo" parameterType="java.lang.Long"> 	
+  	 <!-- SELECT u.`name` AS uname,ct.`name` AS tname,COUNT(c.id) AS count FROM university u
+	LEFT JOIN course c ON c.`university_id`=u.`id`
+	LEFT JOIN course_type ct ON c.`type_id`=ct.`id`
+	GROUP BY ct.`id` -->
+	<!-- SELECT
+	u.name,
+	MAX(CASE ct.name WHEN '摄影爱好' THEN ct.seq ELSE 0 END) AS '摄影爱好',
+	MAX(CASE ct.name WHEN '文史交流' THEN ct.seq ELSE 0 END) AS '文史交流',
+	MAX(CASE ct.name WHEN '影视欣赏' THEN ct.seq ELSE 0 END) AS '影视欣赏',
+	MAX(CASE ct.name WHEN '管理学' THEN ct.seq ELSE 0 END) AS '管理学'
+	FROM university u
+	LEFT JOIN course c ON c.`university_id`=u.`id`
+	LEFT JOIN course_type ct ON c.`type_id`=ct.`id`
+	GROUP BY u.name -->
+	SELECT u.`name` AS uname,ct.`name` AS tname,c.`name` FROM course c
+	LEFT JOIN university u ON c.`university_id`=u.`id`
+	LEFT JOIN course_type ct ON c.`type_id`=ct.`id`
+	GROUP BY c.`id`
+  </select>
+  
+  <select id="selectByTypeAndPage" resultType="com.ssm.model.vo.CourseVo" parameterType="java.lang.Integer"> 	
+  	SELECT u.`name` AS uname,ct.`name` AS tname,c.`name` FROM course c
+	LEFT JOIN university u ON c.`university_id`=u.`id`
+	LEFT JOIN course_type ct ON c.`type_id`=ct.`id`
+	GROUP BY c.`id` LIMIT #{0},#{1}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from course
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ssm.model.Course" >
+    insert into course (id, university_id, type_id, 
+      image_url, name, teacher, 
+      intro, is_recommend, is_delete, 
+      create_id, create_time, update_id, 
+      update_time, praise)
+    values (#{id,jdbcType=BIGINT}, #{universityId,jdbcType=BIGINT}, #{typeId,jdbcType=BIGINT}, 
+      #{imageUrl,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{teacher,jdbcType=VARCHAR}, 
+      #{intro,jdbcType=VARCHAR}, #{isRecommend,jdbcType=BIT}, #{isDelete,jdbcType=BIT}, 
+      #{createId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{praise,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.model.Course" >
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="universityId != null" >
+        university_id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="teacher != null" >
+        teacher,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="isRecommend != null" >
+        is_recommend,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="praise != null" >
+        praise,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="universityId != null" >
+        #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null" >
+        #{teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="isRecommend != null" >
+        #{isRecommend,jdbcType=BIT},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praise != null" >
+        #{praise,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.model.Course" >
+    update course
+    <set >
+      <if test="universityId != null" >
+        university_id = #{universityId,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null" >
+        teacher = #{teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="isRecommend != null" >
+        is_recommend = #{isRecommend,jdbcType=BIT},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null" >
+        update_id = #{updateId,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praise != null" >
+        praise = #{praise,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.model.Course" >
+    update course
+    set university_id = #{universityId,jdbcType=BIGINT},
+      type_id = #{typeId,jdbcType=BIGINT},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      teacher = #{teacher,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      is_recommend = #{isRecommend,jdbcType=BIT},
+      is_delete = #{isDelete,jdbcType=BIT},
+      create_id = #{createId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      praise = #{praise,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

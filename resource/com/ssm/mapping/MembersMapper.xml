@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.mapper.MembersMapper" >
+  <resultMap id="BaseResultMap" type="com.ssm.model.Members" >
+    <id column="m_id" property="mId" jdbcType="INTEGER" />
+    <result column="m_name" property="mName" jdbcType="VARCHAR" />
+    <result column="m_number" property="mNumber" jdbcType="VARCHAR" />
+    <result column="m_phone" property="mPhone" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="REAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="data_status" property="dataStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    m_id, m_name, m_number, m_phone, money, create_time, data_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from members
+    where m_id = #{mId,jdbcType=INTEGER}
+  </select>
+  <select id="selectList" resultType="com.ssm.model.Members">
+    select m_id as mId, m_name as mName, m_number as mNumber, m_phone as mPhone, money as money, create_time as createTime
+    from members
+  </select>
+  <select id="selectListByKey" resultType="com.ssm.model.Members" parameterType="string" >
+    SELECT m_id as mId, m_name as mName, m_number as mNumber, m_phone as mPhone, money as money, create_time as createTime
+    FROM members
+    WHERE m_name LIKE CONCAT('%',#{key},'%')
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from members
+    where m_id = #{mId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssm.model.Members" >
+    insert into members (m_name, m_number, 
+      m_phone, money, create_time, 
+      data_status)
+    values (#{mName}, #{mNumber}, 
+      #{mPhone}, #{money}, now(), 
+      1)
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.model.Members" >
+    insert into members
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        m_id,
+      </if>
+      <if test="mName != null" >
+        m_name,
+      </if>
+      <if test="mNumber != null" >
+        m_number,
+      </if>
+      <if test="mPhone != null" >
+        m_phone,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="dataStatus != null" >
+        data_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mId != null" >
+        #{mId,jdbcType=INTEGER},
+      </if>
+      <if test="mName != null" >
+        #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mNumber != null" >
+        #{mNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mPhone != null" >
+        #{mPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=REAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null" >
+        #{dataStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.model.Members" >
+    update members
+    <set >
+      <if test="mName != null" >
+        m_name = #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mNumber != null" >
+        m_number = #{mNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="mPhone != null" >
+        m_phone = #{mPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=REAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataStatus != null" >
+        data_status = #{dataStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.model.Members" >
+    update members
+    set m_name = #{mName,jdbcType=VARCHAR},
+      m_number = #{mNumber,jdbcType=VARCHAR},
+      m_phone = #{mPhone,jdbcType=VARCHAR},
+      money = #{money,jdbcType=REAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      data_status = #{dataStatus,jdbcType=INTEGER}
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+</mapper>

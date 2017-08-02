@@ -1,0 +1,111 @@
+/*新增学生页面样式*/
+.addstudent_form{
+	width:100%;
+	padding:49px 0px 0px 15%;
+}
+.addstudent_form li{
+	margin-bottom:34px;
+}
+.addstudent_form li span{
+	display: block;
+	width:80px;
+	line-height:34px;
+	float:left;
+	color:#333;
+	font-size:16px;
+	font-family: "微软雅黑";
+	text-align:right;
+	margin-right:16px;
+}
+.addstudent_form li input{
+	display: block;
+	width:178px;
+	height:34px;
+	border:1px #ccc solid;
+}
+.addstudent_form li select{
+	display: block;
+	width:178px;
+	height:34px;
+	border:1px #ccc solid;
+}
+.chose_course_table{
+	width:500px;
+	height:122px;
+	padding:5px;
+	border:1px #ccc solid;
+	overflow-y: scroll;
+}
+.chose_course_table table tr td{
+	width:118px;
+	height:38px;
+	border:1px #48a3a6 solid;
+	font-size:16px;
+	color:#333;
+	font-family:"微软雅黑";
+	text-align: center;
+}
+.admin_table_delete{
+	color:#333;
+}
+.chose_course_table_addcourse{
+	font-size:16px;
+	font-family:"微软雅黑";
+	color:#fc3246;
+	text-decoration: underline;
+	margin:10px 0px 0px 66px;
+	background:url(../images/icon-add.png) 30px 10px no-repeat;
+	border:none!important;
+}
+.addstudent_form li .addstudent_form_yes{
+	display:block;
+	float:left;
+	width:150px;
+	height:45px;
+	border-radius:5px ;
+	background:#48a3a6;
+	margin-right:32px;
+	font-size:20px;
+	color:#fff;
+	font-family: "微软雅黑";
+}
+.addstudent_form li .addstudent_form_no{
+	display:block;
+	width:150px;
+	height:45px;
+	border-radius:5px ;
+	background:#eb6877;
+	font-size:20px;
+	color:#fff;
+	font-family: "微软雅黑";
+}
+/*页面信息提示样式*/
+.addstudent_form li{
+	position:relative;
+}
+.admin_student_tips{
+	position:absolute;
+	left:300px;
+	top:16px;
+}
+
+/*老师新增页面 小按钮样式*/
+ .addstudent_form li .update_btn{
+	width:90px;
+	height:36px;
+	background:#48a3a6;
+	border-radius: 5px;
+	color:#fff;
+	font-size:14px;
+	font-family:"微软雅黑";
+}
+.addstudent_form li .liulan{
+	position:absolute;
+	left:300px;
+	top:0px;
+}
+.addstudent_form li .shangchuan{
+	position:absolute;
+	left:412px;
+	top:0px;
+}
